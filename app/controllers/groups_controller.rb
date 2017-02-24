@@ -1,29 +1,55 @@
 class GroupsController < ApplicationController
+  include UsersHelper
+  include SessionsHelper
+
   def create
-    @group = Groups.new(group_params)
+    @group = current_user.groups.new(name: group_params[:name])
 
-    return @group if @group.save
+    render json: { newPath: user_group_path(current_user, @group) } if @group.save
 
-    redirect user_path(current_user)
+    # redirect_to user_group_path(current_user, @group) if @group.save
   end
 
   def show
+    @suggested_budget = session[:budget]
+
+    # TODO: Incorporate friends association with User model and add to groups#show
+    render 'show'
   end
 
   def delete
   end
+
+  def index
+  end
+
+  def get_conversion_rate
+    render json: conversion_rate(conversion_params[:sell_currency])
+  end
+
+  # TODO: Functionality for inviting users with real-time interaction via PubNub
+  def invite_user(user_id)
+    @guests ||= []
+    @guests << User.find(user_id) if User.find(user_id)
+  end
+
+  def
 
   def get_cities
     render json: restaurant_cities(city_params[:query])
   end
 
   def get_restaurants
-    render json: restaurants(restaurant_params[:city_id], restaurant_params[:query], restaurant_params[:max_budget])
+    render json: restaurants(restaurant_params[:query], restaurant_params[:max_budget], restaurant_params[:city_id])
   end
 
   private
+    def conversion_params
+      params.require(:currency).permit(:sell_currency)
+    end
+
     def group_params
-      params.require(:group).permit(:name)
+      params.require(:group).permit(:name, :user_id)
     end
 
     def city_params
@@ -58,7 +84,7 @@ class GroupsController < ApplicationController
       end
     end
 
-    def restaurants(city_id, query, max_budget)
+    def restaurants(query, max_budget, city_id)
       api_key = ENV['ZOMATO_API_KEY']
       url = URI("https://developers.zomato.com/api/v2.1/search?q=" + query + "&entity_id=" + city_id + "&entity_type=city&sort=rating&order=desc")
 

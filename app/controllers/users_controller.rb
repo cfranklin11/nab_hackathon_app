@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   def show
     @currencies = currency_codes
     @suggested_budget = magic_machine_learning_magic(current_user[:id])
+    session[:budget] = @suggested_budget
+    @group = Group.new()
   end
 
   def create

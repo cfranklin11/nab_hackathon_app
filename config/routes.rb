@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get '/convert', to: 'users#get_conversion_rate'
   get '/cities', to: 'groups#get_cities'
-  get '/restaurants', to: 'groups#get_restaurants'
+  post '/users/:user_id/groups/:id/restaurants', to: 'groups#get_restaurants'
 
 
   resources :users do

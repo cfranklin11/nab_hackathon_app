@@ -1,18 +1,19 @@
 class HelloWorld extends React.Component {
   handleClick () {
     $.get({
-      url: '/restaurants',
-      method: 'GET',
+      url: this.props.path,
+      method: 'POST',
       credentials: 'same-origin',
       data: {
-        restaurant: {
-          city_id: 259,
-          query: 'italian',
-          max_budget: 100,
+        group: {
+          name: 'stuff13',
         },
       },
     }, (data) => {
-      console.log(data);
+      // console.log(data);
+      // debugger;
+      // newPath = JSON.parse(data)
+      window.location = data.newPath
     });
   }
 
@@ -20,7 +21,7 @@ class HelloWorld extends React.Component {
     return (
       <div>
         <div>Path: {this.props.path}</div>
-        <button onClick={ this.handleClick }>Click Me</button>
+        <button onClick={ this.handleClick.bind(this) }>Click Me</button>
       </div>
     );
   }
