@@ -46,6 +46,13 @@ class GroupContainer extends React.Component {
         </select>
         <label htmlFor="food">What kind of cuisine do you want?</label>
         <input type="text" id="food" name="restaurant[query]" onChange={this.handleCuisineChange.bind(this)} />
+        <label htmlFor="currency">Select Currency</label>
+        <select id="currency">
+          <option value="AUD" key="0">AUD</option>
+          {this.props.currencies.map((currency, index) => {
+            return (<option value={currency} key={index + 1}>{currency}</option>);
+          })}
+        </select>
         <label htmlFor="budget">Your suggested budget is {this.props.budget}. What do you want to spend?</label>
         <input type="number" id="restaurant[max_budget]" onChange={this.handleBudgetChange.bind(this)} />
         <input type="hidden" name="restaurant[city_id]" value="259" />
@@ -58,4 +65,5 @@ class GroupContainer extends React.Component {
 GroupContainer.propTypes = {
   budget: React.PropTypes.number,
   path: React.PropTypes.string,
+  currencies: React.PropTypes.array,
 };

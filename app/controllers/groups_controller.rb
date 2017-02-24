@@ -3,15 +3,21 @@ class GroupsController < ApplicationController
   include SessionsHelper
 
   def create
-    @group = current_user.groups.new(name: group_params[:name])
+    @user = current_user
+    @group = @user.groups.new(name: group_params[:name])
 
-    render json: { newPath: user_group_path(current_user, @group) } if @group.save
+    byebug
+
+   if @user.save
+     redirect_to user_group_path(@user, @group)
+   end
 
     # redirect_to user_group_path(current_user, @group) if @group.save
   end
 
   def show
     @suggested_budget = session[:budget]
+    @currencies = currency_codes
 
     # TODO: Incorporate friends association with User model and add to groups#show
     render 'show'

@@ -1,1 +1,1 @@
-<%= react_component('GroupContainer', budget: @suggested_budget, path: "#{user_group_path(current_user[:id], params[:id])}") %>
+<%= react_component('GroupContainer', budget: @suggested_budget, path: "#{user_group_path(current_user[:id], params[:id])}", currencies: @currencies) %>
