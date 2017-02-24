@@ -1,4 +1,4 @@
-class HelloWorld extends React.Component {
+class CurrencyForm extends React.Component {
   handleClick () {
     $.get({
       url: '/data',
@@ -38,6 +38,6 @@ class HelloWorld extends React.Component {
   }
 }
 
-HelloWorld.propTypes = {
+CurrencyForm.propTypes = {
   path: React.PropTypes.string,
 };
