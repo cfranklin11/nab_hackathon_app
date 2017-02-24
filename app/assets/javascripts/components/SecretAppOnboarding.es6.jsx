@@ -4,30 +4,42 @@ class SecretAppOnboarding extends React.Component {
   }
 
   handleClick (step) {
+    console.log(step);
     this.setState({ step: step })
   }
 
   renderLogin () {
     return (
-      <div className="container">
-        <h1 className="text-center">Lucky App!</h1>
+      <div>
+
+         
         <Login changeStep={this.handleClick.bind(this)} />
+
+        </div>
+
+    );
+  }
+
+  renderSignUp () {
+    return (
+      <div>
+       <SignUp signMeUp={this.handleClick.bind(this)}/>
       </div>
     );
   }
 
-  renderStep2 () {
+  renderUserPage () {
     return (
       <div>
-       <SecretAppOnboardingStep2 changeStep={this.handleClick.bind(this)}/>
+       <UserPage changeStep={this.handleClick.bind(this)}/>
       </div>
     );
   }
 
-  renderStep3a () {
+  renderGroupPage() {
     return (
       <div>
-       <SecretAppOnboardingStep3a changeStep={this.handleClick.bind(this)}/>
+       <GroupPage changeStep={this.handleClick.bind(this)}/>
       </div>
     );
   }
@@ -48,16 +60,22 @@ class SecretAppOnboarding extends React.Component {
 
   render () {
     return (
+      <div>
+      <NavBar />
       <div className="container">
+
         {this.state.step === 1 && this.renderLogin()}
 
-        {this.state.step === 2 && this.renderStep2()}
+        {this.state.step === 6 && this.renderSignUp()}
 
-        {this.state.step === '3a' && this.renderStep3a()}
+        {this.state.step === 2 && this.renderUserPage()}
+
+        {this.state.step === 'go-out' && this.renderGroupPage()}
 
         {this.state.step === '3b' && this.renderStep3b()}
 
         {this.state.step === 4 && this.renderStep4()}
+      </div>
       </div>
     );
   }

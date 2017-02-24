@@ -3,13 +3,17 @@ class Login extends React.Component {
     super(props);
   }
 
-nextStep(){
-  this.props.changeStep(2);
+nextStep(oEvent){
+
+  if (oEvent.target.dataset.signup === "true") {
+    this.props.changeStep(6);
+  } else {
+    this.props.changeStep(2);
+  }
+
 }
 
-logIn() {
-  console.log("start now!");
-}
+
 
   render () {
     return (
@@ -30,13 +34,9 @@ logIn() {
                <button type="submit" className="btn btn-primary" onClick={ this.nextStep.bind(this) }>start now</button>
 
               </div>
- 
-        <a className="btn btn-lg btn-link" href="#" role="button" onClick={ this.logIn }>Sign up</a>
-
-      </div>
-
-
-    );
+              <a type="submit" className="btn btn-primary btn-link" data-signup="true" onClick={ this.nextStep.bind(this) }>Sign up</a>
+       </div>
+     );
   }
 }
 
