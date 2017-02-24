@@ -5,38 +5,33 @@ class HelloWorld extends React.Component {
       method: 'GET',
       credentials: 'same-origin',
     }, (data) => {
-      console.log(data);
+      console.log("DATA!",data);
     });
   }
 
+
   render () {
     return (
-    <div className="col-xs-12 col-md-8">
-      <form>
-      <div className="form-group">
-        <label htmlFor="ammount">How much money you want to spend today?</label>
-        <input type="ammount" className="form-control" id="exampleInputEmail1" placeholder="Ammount" />
-      </div>
-      <div className="form-group">
-      <label htmlFor="currency">Enter your currency</label>
-      // <input type="currency" className="form-control" id="exampleInputPassword1" placeholder="Your currency"/>
-      <div className="dropdown">
-      <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      Dropdown
-      <span className="caret"></span>
-      </button>
-        <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-      <li><a href="#">Action</a></li>
-      <li><a href="#">Another action</a></li>
-      <li><a href="#">Something else here</a></li>
-      <li role="separator" className="divider"></li>
-      <li><a href="#">Separated link</a></li>
-      </ul>
-      </div>
-      </div>
-      <button type="submit" className="btn btn-primary">Submit</button>
-      </form>
+  <div className="col-xs-12 col-md-8">
+    <form>
+    <div className="form-group">
+      <label htmlFor="ammount">How much money you want to spend today?</label>
+      <input type="ammount" className="form-control" id="exampleInputEmail1" placeholder="Ammount" />
     </div>
+    <div className="form-group">
+    <label htmlFor="currency">Enter your currency</label>
+    // <input type="currency" className="form-control" id="exampleInputPassword1" placeholder="Your currency"/>
+    <select className="form-control">
+     <option>USD</option>
+     <option>CLP</option>
+     <option>EUR</option>
+     <option>JPY</option>
+     <option>INR</option>
+   </select>
+    </div>
+    <button type="submit" className="btn btn-primary" onClick={ this.handleClick }>Submit</button>
+    </form>
+  </div>
 
 
     );
