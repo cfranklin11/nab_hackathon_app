@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
     else
       redirect_to root_path
@@ -29,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def get_conversion_rate
-    @conversion_rate = conversion_rate(conversion_params)
+    render json: conversion_rate(conversion_params[:sell_currency])
   end
 
   private

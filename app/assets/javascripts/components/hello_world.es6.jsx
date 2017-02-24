@@ -1,9 +1,16 @@
 class HelloWorld extends React.Component {
   handleClick () {
     $.get({
-      url: '/data',
+      url: '/restaurants',
       method: 'GET',
       credentials: 'same-origin',
+      data: {
+        restaurant: {
+          city_id: 259,
+          query: 'italian',
+          max_budget: 100,
+        },
+      },
     }, (data) => {
       console.log(data);
     });
