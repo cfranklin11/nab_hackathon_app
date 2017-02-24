@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   post '/logout', to: 'sessions#destroy'
 
   get '/convert', to: 'users#get_conversion_rate'
+  get '/cities', to: 'groups#get_cities'
+  get '/restaurants', to: 'groups#get_restaurants'
+
 
   resources :users do
     resources :groups

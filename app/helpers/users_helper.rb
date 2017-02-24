@@ -11,7 +11,7 @@ module UsersHelper
 
   def conversion_rate(sell_currency)
     requested_exchange = currency_exchange_rates.select do |exchange_rate|
-      sell_currency == exchange_rate["sellCurrency"]
+      sell_currency == exchange_rate["buyCurrency"]
     end
 
     if requested_exchange.first
@@ -38,6 +38,8 @@ module UsersHelper
       response = http.request(request)
       response_hash = JSON.parse(response.read_body)
 
-      response_hash["fxRatesResponse"]["fxRates"]
+      if response_hash && response_hash["fxRatesResponse"]
+        response_hash["fxRatesResponse"]["fxRates"]
+      end
     end
 end
