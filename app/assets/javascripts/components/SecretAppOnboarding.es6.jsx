@@ -7,11 +7,11 @@ class SecretAppOnboarding extends React.Component {
     this.setState({ step: step })
   }
 
-  renderStep1 () {
+  renderLogin () {
     return (
-      <div>
-        <p>SecretAppOnboarding</p>
-        <SecretAppOnboardingStep1 changeStep={this.handleClick.bind(this)} />
+      <div className="container">
+        <h1 className="text-center">Lucky App!</h1>
+        <Login changeStep={this.handleClick.bind(this)} />
       </div>
     );
   }
@@ -49,7 +49,7 @@ class SecretAppOnboarding extends React.Component {
   render () {
     return (
       <div className="container">
-        {this.state.step === 1 && this.renderStep1()}
+        {this.state.step === 1 && this.renderLogin()}
 
         {this.state.step === 2 && this.renderStep2()}
 

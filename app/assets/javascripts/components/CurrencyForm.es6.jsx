@@ -28,7 +28,7 @@ class CurrencyForm extends React.Component {
     </div>
     <div className="form-group">
     <label htmlFor="currency">Enter your currency</label>
-    // <input type="currency" className="form-control" id="exampleInputPassword1" placeholder="Your currency"/>
+     <input type="currency" className="form-control" id="exampleInputPassword1" placeholder="Your currency"/>
     <select
               className="form-control"
               id="widget-select-group"

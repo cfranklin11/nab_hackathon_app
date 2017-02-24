@@ -11,7 +11,12 @@ class SecretAppOnboardingStep3b extends React.Component {
     return (
       <div className="container">
 
+
+        <div className="col-xs-12 col-md-8">
         <p> step 3b: I want to spend less moneys </p>
+        <SecretApp />
+        </div>
+
 
         <button type="submit" className="btn btn-primary"  onClick={ this.nextStep.bind(this) }>Show me what ypu got!</button>
 
