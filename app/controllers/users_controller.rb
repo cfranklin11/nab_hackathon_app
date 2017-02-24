@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @currencies = currency_codes
+    @suggested_budget = magic_machine_learning_magic(current_user[:id])
   end
 
   def create
