@@ -1,4 +1,1 @@
-
-<%= react_component('SecretApp', currencies: @currencies, budget: @suggested_budget) %>
-
-<%= react_component('HelloWorld', path: "#{user_groups_path(user_id: current_user[:id])}") %>
+<%= react_component('UserPage', path: "#{user_groups_path(user_id: current_user[:id])}") %>

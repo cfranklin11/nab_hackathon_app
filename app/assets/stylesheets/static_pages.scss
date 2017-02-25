@@ -47,13 +47,17 @@ border-color: #1caaa3;
 .title {
   color: white;
   animation-name: animation-title;
-  animation-duration: 1s;
+  animation-duration: 0.3s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-play-state: running;
 }
 @keyframes animation-title {
-  0%     {color: #1caaa3;}
-  50.0%  {color:#d1ac2b;}
-  100.0%  {color:#1caaa3;}
+  0%     {color: yellow;}
+  50.0%  {color:#3bff00;}
+  100.0%  {color:yellow;}
+}
+
+.suggested-budget {
+  color: #1caaa3;
 }

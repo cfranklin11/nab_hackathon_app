@@ -6,8 +6,6 @@ class GroupsController < ApplicationController
     @user = current_user
     @group = @user.groups.new(name: group_params[:name])
 
-    byebug
-
    if @user.save
      redirect_to user_group_path(@user, @group)
    end
