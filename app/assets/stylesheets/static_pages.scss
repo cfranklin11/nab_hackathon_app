@@ -9,9 +9,8 @@ body {
   color: #000;
 }
 .navbar-inverse {
-
-  background-color: #93c54b;
-border-color: #93c54b;
+background-color: #1caaa3;
+border-color: #1caaa3;
 }
 .navbar-inverse .navbar-brand {
   color: #fff;
@@ -22,9 +21,43 @@ border-color: #93c54b;
 
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
   color: #ffffff;
-  background-color: #89be3d;
+  background-color: #d1ac2b;
 }
 .jumbotron h1, .jumbotron .h1 {
   font-size: 63px;
-  color:orange;
+  color:#d1ac2b;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1caaa3;
+  border-color: #1caaa3;
+}
+
+.welcome-greeting {
+  line-height: 2;
+}
+.username {
+  color: #1caaa3;
+}
+.budget {
+  color: #a81d3b;
+}
+
+.title {
+  color: white;
+  animation-name: animation-title;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+@keyframes animation-title {
+  0%     {color: yellow;}
+  50.0%  {color:#3bff00;}
+  100.0%  {color:yellow;}
+}
+
+.suggested-budget {
+  color: #1caaa3;
 }

@@ -1,22 +1,18 @@
 class SecretAppOnboarding extends React.Component {
+
   componentWillMount () {
     this.state = { step: 1 }
   }
 
   handleClick (step) {
-    console.log(step);
     this.setState({ step: step })
   }
 
   renderLogin () {
     return (
       <div>
-
-         
         <Login changeStep={this.handleClick.bind(this)} />
-
         </div>
-
     );
   }
 
