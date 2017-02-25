@@ -30,6 +30,13 @@ class SignUp extends React.Component {
              <button type="submit" className="btn btn-primary">Submit</button>
            </form>
         </div>
+        <a
+          type="submit"
+          className="btn btn-primary btn-link"
+          data-signup="true"
+          onClick={this.props.changeView}>
+          Log in
+        </a>
       </div>
 
     );
@@ -38,5 +45,5 @@ class SignUp extends React.Component {
 
 
 SignUp.propTypes = {
-  changeStep: React.PropTypes.func,
+  changeView: React.PropTypes.func,
 };

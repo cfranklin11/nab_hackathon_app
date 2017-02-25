@@ -1,48 +1,74 @@
 class Login extends React.Component {
-  constructor (props) {
-    super(props);
+  componentWillMount () {
+    this.state = { view: 'login' };
   }
 
-nextStep(oEvent){
-  // TODO: Implement actual login
-  window.location = '/users/1';
+  handleClick () {
+    const { view } = this.state;
 
-  // if (oEvent.target.dataset.signup === "true") {
-  //   this.props.changeStep(6);
-  // } else {
-  //   this.props.changeStep(2);
-  // }
+    if (view === 'login') {
+      this.setState({ view: 'signup' });
+    } else {
+      this.setState({ view: 'login' });
+    }
+  }
 
-}
+  renderLogin () {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+    return (
+      <div className="row">
+        <div className="jumbotron">
+          <h1>Welcome</h1>
+          <p>Enter your details</p>
+          <form action="/login" method="post">
+            <div className="form-group">
+              <label htmlFor="exampleInputEmail1">Username</label>
+              <input
+                name="session[email]"
+                type="email"
+                className="form-control"
+                id="exampleInputEmail1"
+                placeholder="Email" />
+            </div>
 
+            <div className="form-group">
+              <label htmlFor="exampleInputPassword1">Password</label>
+              <input
+                name="session[password]"
+                type="password"
+                className="form-control"
+                id="exampleInputPassword1"
+                placeholder="Password" />
+            </div>
+            <input type="hidden" name="authenticity_token" value={csrfToken} />
+
+            <button type="submit" className="btn btn-primary">start now</button>
+          </form>
+        </div>
+        <a
+          type="submit"
+          className="btn btn-primary btn-link"
+          data-signup="true"
+          onClick={this.handleClick.bind(this)}>
+          Sign up
+        </a>
+      </div>
+     );
+  }
 
   render () {
     return (
-      <div className="row">
-               <div className="jumbotron">
-                <h1>Welcome</h1>
-                <p>Enter your details</p>
-                <div className="form-group">
-                 <label htmlFor="exampleInputEmail1">Username</label>
-                 <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Email" />
-               </div>
+      <div>
+        {this.state.view === 'login' && this.renderLogin()}
 
-               <div className="form-group">
-                 <label htmlFor="exampleInputPassword1">Password</label>
-                 <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-               </div>
-
-               <button type="submit" className="btn btn-primary" onClick={ this.nextStep.bind(this) }>start now</button>
-
-              </div>
-              <a type="submit" className="btn btn-primary btn-link" data-signup="true" onClick={ this.nextStep.bind(this) }>Sign up</a>
-       </div>
-     );
+        {this.state.view === 'signup' && <SignUp changeView={this.handleClick.bind(this)}/>}
+      </div>
+    );
   }
 }
 
 
 Login.propTypes = {
-  changeStep: React.PropTypes.func
+  changeStep: React.PropTypes.func,
 };
