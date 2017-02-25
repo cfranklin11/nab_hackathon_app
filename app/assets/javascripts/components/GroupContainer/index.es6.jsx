@@ -8,11 +8,12 @@ class GroupContainer extends React.Component {
       restaurants: [],
       currency: 'AUD',
       display_budget: this.props.max_budget,
+      conversion_rate: 1,
     };
   }
 
   handleClick () {
-    const { query, max_budget, city_id } = this.state;
+    const { query, custom_budget, city_id } = this.state;
     $.post({
       url: `${this.props.path}/restaurants`,
       credentials: 'same-origin',
@@ -20,7 +21,7 @@ class GroupContainer extends React.Component {
         restaurant: {
           query: query,
           city_id: 259,
-          max_budget: max_budget,
+          max_budget: custom_budget,
         },
       },
     }, (data) => {
@@ -29,33 +30,49 @@ class GroupContainer extends React.Component {
   }
 
   handleSelect (e) {
+    const { custom_budget, display_budget, conversion_rate } = this.state;
     const option = e.target.options[e.target.selectedIndex].value;
 
     this.setState({ currency: option });
 
-    $.get({
-      url: `/convert`,
-      credentials: 'same-origin',
-      data: {
-        currency: {
-          sell_currency: option,
+    if (option === 'AUD') {
+      this.customInput.value = Math.round(this.customInput.value / conversion_rate, 2);
+      this.setState({
+        custom_budget: (custom_budget / conversion_rate),
+        display_budget: Math.round(display_budget / conversion_rate, 2),
+        conversion_rate: 1,
+      });
+    } else {
+      $.get({
+        url: `/convert`,
+        credentials: 'same-origin',
+        data: {
+          currency: {
+            sell_currency: option,
+          },
         },
-      },
-    }, (data) => {
-      this.updateDisplayBudget(data);
-    });
+      }, (data) => {
+        this.updateDisplayBudget(data);
+      });
+    }
   }
 
   updateDisplayBudget (data) {
-    const newBudget = Math.round(parseFloat(this.state.max_budget) * parseFloat(data), 2);
-    this.setState({ conversion_rate: parseFloat(data) });
-    this.setState({ display_budget: newBudget });
+    const { currency, max_budget } = this.state;
+    const newBudget = currency === 'AUD' ?
+      max_budget :
+      Math.round(parseFloat(this.state.max_budget) * parseFloat(data), 2);
+    this.customInput.value = newBudget;
+    this.setState({
+      conversion_rate: parseFloat(data),
+      display_budget: newBudget,
+    });
   }
 
   handleBudgetChange (e) {
     const budget = e.target.value;
-    // const custom_budget = budget * this.state.conversion_rate;
-    this.setState({ max_budget: budget });
+    const custom_budget = budget / this.state.conversion_rate;
+    this.setState({ custom_budget: custom_budget });
   }
 
   handleCuisineChange (e) {
@@ -104,8 +121,8 @@ class GroupContainer extends React.Component {
           </div>
 
           <div className="form-group">
-          <label htmlFor="budget">What do you want to spend?</label>
-          <input className="form-control" type="number" name="restaurant[max_budget]" onChange={this.handleBudgetChange.bind(this)} />
+          <label htmlFor="budget">What do you want to spend? (in {this.state.currency})</label>
+          <input ref={(input) => {this.customInput = input;}} className="form-control" type="number" name="restaurant[max_budget]" onChange={this.handleBudgetChange.bind(this)} />
         </div>
 
         <input type="hidden" name="restaurant[city_id]" value="259" />
