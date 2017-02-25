@@ -4,12 +4,14 @@ class Login extends React.Component {
   }
 
 nextStep(oEvent){
+  // TODO: Implement actual login
+  window.location = '/users/1';
 
-  if (oEvent.target.dataset.signup === "true") {
-    this.props.changeStep(6);
-  } else {
-    this.props.changeStep(2);
-  }
+  // if (oEvent.target.dataset.signup === "true") {
+  //   this.props.changeStep(6);
+  // } else {
+  //   this.props.changeStep(2);
+  // }
 
 }
 

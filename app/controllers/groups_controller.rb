@@ -6,8 +6,6 @@ class GroupsController < ApplicationController
     @user = current_user
     @group = @user.groups.new(name: group_params[:name])
 
-    byebug
-
    if @user.save
      redirect_to user_group_path(@user, @group)
    end
@@ -105,15 +103,15 @@ class GroupsController < ApplicationController
       response_hash = JSON.parse(response.read_body)
 
       budget_restaurants = response_hash["restaurants"].select do |restaurant|
-        restaurant[:average_cost_for_two].to_f <= max_budget.to_f * 2
+        restaurant["restaurant"]["average_cost_for_two"].to_f <= max_budget.to_f * 2
       end
 
       budget_restaurants.map do |restaurant_data|
         restaurant = restaurant_data["restaurant"]
 
         {
-          name: restaurant["id"],
-          url: restaurant["name"],
+          name: restaurant["name"],
+          url: restaurant["url"],
           address: restaurant["location"]["address"],
           cuisines: restaurant["cuisines"],
           average_cost_for_two: restaurant["average_cost_for_two"],
